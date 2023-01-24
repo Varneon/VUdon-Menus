@@ -25,5 +25,11 @@ namespace Varneon.VUdon.Menus.Abstract
         public virtual bool TrySetOptionValue(string path, int value) { return false; }
 
         public virtual bool TrySetSliderValue(string path, float value) { return false; }
+
+        public virtual bool TrySetToggleValueWithoutNotify(string path, bool value) { return false; }
+
+        public virtual bool TrySetOptionValueWithoutNotify(string path, int value) { return false; }
+
+        public virtual bool TrySetSliderValueWithoutNotify(string path, float value) { return false; }
     }
 }
