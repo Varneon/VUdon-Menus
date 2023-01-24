@@ -2,8 +2,7 @@
     "name": "Varneon.VUdon.Menus.Runtime",
     "references": [
         "UdonSharp.Runtime",
-        "VRC.Udon",
-        "Unity.TextMeshPro"
+        "VRC.Udon"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
