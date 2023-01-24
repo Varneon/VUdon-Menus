@@ -10,11 +10,13 @@ namespace Varneon.VUdon.Menus.Abstract
     {
         public abstract bool IsPathRegistered(string path);
 
+        public virtual bool TryRegisterPage(string path, string tooltip = "") { return false; }
+
         public virtual bool TryRegisterButton(string path, MenuEventCallbackReceiver callbackReceiver, string tooltip = "") { return false; }
 
         public virtual bool TryRegisterToggle(string path, MenuEventCallbackReceiver callbackReceiver, bool defaultValue, string offOptionName = "Off", string onOptionName = "On", string tooltip = "") { return false; }
 
-        public virtual bool TryRegisterOption(string path, MenuEventCallbackReceiver callbackReceiver, int defaultValue, string[] optionNames, string tooltip = "") { return false; }
+        public virtual bool TryRegisterOption(string path, MenuEventCallbackReceiver callbackReceiver, string[] optionNames, int defaultValue, string tooltip = "") { return false; }
 
         public virtual bool TryRegisterSlider(string path, MenuEventCallbackReceiver callbackReceiver, float defaultValue, float minValue = 0f, float maxValue = 1f, int steps = 10, string unit = "%", string tooltip = "") { return false; }
     
