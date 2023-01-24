@@ -1,7 +1,8 @@
 {
     "name": "Varneon.VUdon.Menus.Editor",
     "references": [
-        "Varneon.VUdon.Menus.Runtime"
+        "Varneon.VUdon.Menus.Runtime",
+        "UdonSharp.Runtime"
     ],
     "includePlatforms": [
         "Editor"
