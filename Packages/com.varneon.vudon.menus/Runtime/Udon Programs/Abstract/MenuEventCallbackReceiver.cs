@@ -29,10 +29,34 @@ namespace Varneon.VUdon.Menus.Abstract
         public virtual void OnMenuOptionValueChanged(string path, int newValue) { }
 
         /// <summary>
+        /// Gets invoked when a menu option's value editing begins
+        /// </summary>
+        /// <param name="path"></param>
+        public virtual void OnMenuOptionBeginValueEdit(string path) { }
+
+        /// <summary>
+        /// Gets invoked when a menu option's value editing ends
+        /// </summary>
+        /// <param name="path"></param>
+        public virtual void OnMenuOptionEndValueEdit(string path) { }
+
+        /// <summary>
         /// Gets invoked when a menu slider's value changes and this receiver has been linked as the receiver for that slider
         /// </summary>
         /// <param name="path">Menu item path</param>
         /// <param name="newValue">New value of the menu slider</param>
         public virtual void OnMenuSliderValueChanged(string path, float newValue) { }
+
+        /// <summary>
+        /// Gets invoked when a menu slider's value editing begins
+        /// </summary>
+        /// <param name="path"></param>
+        public virtual void OnMenuSliderBeginValueEdit(string path) { }
+
+        /// <summary>
+        /// Gets invoked when a menu slider's value editing ends
+        /// </summary>
+        /// <param name="path"></param>
+        public virtual void OnMenuSliderEndValueEdit(string path) { }
     }
 }
