@@ -9,6 +9,19 @@ namespace Varneon.VUdon.Menus.Abstract
     public abstract class MenuEventCallbackReceiver : UdonSharpBehaviour
     {
         /// <summary>
+        /// Gets invoked when a menu item gets enabled or disabled
+        /// </summary>
+        /// <param name="path">Menu item path</param>
+        /// <param name="enabled">Menu item enabled state</param>
+        public virtual void OnMenuItemEnabledStateChanged(string path, bool enabled) { }
+
+        /// <summary>
+        /// Gets invoked when a menu item gets removed
+        /// </summary>
+        /// <param name="path">Menu item path</param>
+        public virtual void OnMenuItemRemoved(string path) { }
+
+        /// <summary>
         /// Gets invoked when a menu button gets clicked and this receiver has been linked as the receiver for that button
         /// </summary>
         /// <param name="path">Menu item path</param>
