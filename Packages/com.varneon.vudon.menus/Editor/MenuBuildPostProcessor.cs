@@ -1,4 +1,5 @@
 ﻿using JetBrains.Annotations;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using UnityEditor.Callbacks;
@@ -17,9 +18,14 @@ namespace Varneon.VUdon.Menus.Editor
 
             MenuItemRegistrar[] menuItemRegistrars = Resources.FindObjectsOfTypeAll<MenuItemRegistrar>().Where(q => q.gameObject.scene.IsValid()).ToArray();
 
+            MenuItemDescriptor[] menuItemDescriptors = Resources.FindObjectsOfTypeAll<MenuItemDescriptor>().Where(q => q.gameObject.scene.IsValid()).ToArray();
+
             foreach (MenuProvider menuProvider in menuProviders)
             {
-                PostProcessMenuProvider(menuProvider, menuItemRegistrars.Where(r => r.Menu.Equals(menuProvider)).SelectMany(r => r.MenuItems).ToImmutableSortedSet());
+                IEnumerable<MenuItemInfo> registrarItems = menuItemRegistrars.Where(r => r.Menu.Equals(menuProvider)).SelectMany(r => r.MenuItems);
+                IEnumerable<MenuItemInfo> descriptorItems = menuItemDescriptors.Where(d => d.Menu.Equals(menuProvider)).SelectMany(d => d.MenuItems).Select(i => i.GetInfo());
+
+                PostProcessMenuProvider(menuProvider, registrarItems.Union(descriptorItems).ToImmutableSortedSet());
             }
         }
 
