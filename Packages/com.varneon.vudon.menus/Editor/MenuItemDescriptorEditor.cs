@@ -26,9 +26,37 @@ namespace Varneon.VUdon.Menus.Editor
 
             GUILayout.Space(20);
 
-            for (int i = 0; i < descriptor.MenuItems.Count; i++)
+            using (new GUILayout.HorizontalScope())
             {
-                MenuItemDescriptor.Item item = descriptor.MenuItems[i];
+                if(GUILayout.Button("Collapse All"))
+                {
+                    Undo.RecordObject(descriptor, "Collapse All Items");
+
+                    foreach(MenuItemDescriptor.Item item in descriptor.menuItems)
+                    {
+                        item.Expanded = false;
+                    }
+                }
+                else if (GUILayout.Button("Expand All"))
+                {
+                    Undo.RecordObject(descriptor, "Expand All Items");
+
+                    foreach (MenuItemDescriptor.Item item in descriptor.menuItems)
+                    {
+                        item.Expanded = true;
+                    }
+                }
+                else if(GUILayout.Button("Sort Items"))
+                {
+                    Undo.RecordObject(descriptor, "Sort Items");
+
+                    descriptor.menuItems.Sort();
+                }
+            }
+
+            for (int i = 0; i < descriptor.menuItems.Count; i++)
+            {
+                MenuItemDescriptor.Item item = descriptor.menuItems[i];
 
                 if (item.DrawInspectorPanel(out bool removed))
                 {
