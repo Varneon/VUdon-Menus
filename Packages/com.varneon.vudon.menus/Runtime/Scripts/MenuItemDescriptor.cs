@@ -1,19 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Varneon.VUdon.Menus.Abstract;
 using Varneon.VUdon.Menus.Enums;
 
 namespace Varneon.VUdon.Menus
 {
     [AddComponentMenu("VUdon/Menu Item Descriptor")]
-    public class MenuItemDescriptor : MonoBehaviour
+    public class MenuItemDescriptor : MenuItemRegistrar
     {
-        [SerializeField]
-        internal MenuProvider Menu;
+        public override MenuProvider Menu => menu;
+
+        public override MenuItemInfo[] MenuItems => menuItems.Select(i => i.GetInfo()).ToArray();
 
         [SerializeField]
-        internal List<Item> MenuItems = new List<Item>();
+        [FormerlySerializedAs("Menu")]
+        internal MenuProvider menu;
+
+        [SerializeField]
+        [FormerlySerializedAs("MenuItems")]
+        internal List<Item> menuItems = new List<Item>();
 
         private static GUIContent
             ButtonIcon,

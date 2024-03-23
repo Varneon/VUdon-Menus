@@ -22,7 +22,7 @@ namespace Varneon.VUdon.Menus.Editor
 
             Undo.RecordObject(descriptor, "Edit Menu Hierarchy");
 
-            descriptor.Menu = (MenuProvider)EditorGUILayout.ObjectField("Menu", descriptor.Menu, typeof(MenuProvider), true);
+            descriptor.menu = (MenuProvider)EditorGUILayout.ObjectField("Menu", descriptor.menu, typeof(MenuProvider), true);
 
             GUILayout.Space(20);
 
@@ -34,12 +34,12 @@ namespace Varneon.VUdon.Menus.Editor
                 {
                     if (removed)
                     {
-                        descriptor.MenuItems.RemoveAt(i);
+                        descriptor.menuItems.RemoveAt(i);
 
                         break;
                     }
 
-                    descriptor.MenuItems[i] = item;
+                    descriptor.menuItems[i] = item;
                 }
             }
 
@@ -47,10 +47,10 @@ namespace Varneon.VUdon.Menus.Editor
             {
                 GenericMenu menu = new GenericMenu();
 
-                menu.AddItem(new GUIContent("Button"), false, () => descriptor.MenuItems.Add(MenuItemDescriptor.Item.Button()));
-                menu.AddItem(new GUIContent("Toggle"), false, () => descriptor.MenuItems.Add(MenuItemDescriptor.Item.Toggle()));
-                menu.AddItem(new GUIContent("Option"), false, () => descriptor.MenuItems.Add(MenuItemDescriptor.Item.Option()));
-                menu.AddItem(new GUIContent("Slider"), false, () => descriptor.MenuItems.Add(MenuItemDescriptor.Item.Slider()));
+                menu.AddItem(new GUIContent("Button"), false, () => descriptor.menuItems.Add(MenuItemDescriptor.Item.Button()));
+                menu.AddItem(new GUIContent("Toggle"), false, () => descriptor.menuItems.Add(MenuItemDescriptor.Item.Toggle()));
+                menu.AddItem(new GUIContent("Option"), false, () => descriptor.menuItems.Add(MenuItemDescriptor.Item.Option()));
+                menu.AddItem(new GUIContent("Slider"), false, () => descriptor.menuItems.Add(MenuItemDescriptor.Item.Slider()));
 
                 menu.ShowAsContext();
             }
