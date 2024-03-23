@@ -39,22 +39,22 @@ namespace Varneon.VUdon.Menus.Editor
             switch (menuItem.Type)
             {
                 case Enums.MenuItemType.Page:
-                    menuProvider.TryRegisterPage(menuItem.Path, menuItem.Tooltip);
+                    menuProvider.TryRegisterPage(menuItem.Path, menuItem.Tooltip, menuItem.Enabled);
                     break;
                 case Enums.MenuItemType.Button:
-                    menuProvider.TryRegisterButton(menuItem.Path, menuItem.CallbackReceiver, menuItem.Tooltip);
+                    menuProvider.TryRegisterButton(menuItem.Path, menuItem.CallbackReceiver, menuItem.Tooltip, menuItem.Enabled);
                     break;
                 case Enums.MenuItemType.Toggle:
                     MenuToggleItemInfo toggleItem = (MenuToggleItemInfo)menuItem;
-                    menuProvider.TryRegisterToggle(menuItem.Path, menuItem.CallbackReceiver, toggleItem.DefaultValue, toggleItem.OffLabel, toggleItem.OnLabel, menuItem.Tooltip);
+                    menuProvider.TryRegisterToggle(menuItem.Path, menuItem.CallbackReceiver, toggleItem.DefaultValue, toggleItem.OffLabel, toggleItem.OnLabel, menuItem.Tooltip, menuItem.Enabled);
                     break;
                 case Enums.MenuItemType.Option:
                     MenuOptionItemInfo optionItem = (MenuOptionItemInfo)menuItem;
-                    menuProvider.TryRegisterOption(menuItem.Path, menuItem.CallbackReceiver, optionItem.Options, optionItem.DefaultValue, menuItem.Tooltip);
+                    menuProvider.TryRegisterOption(menuItem.Path, menuItem.CallbackReceiver, optionItem.Options, optionItem.DefaultValue, menuItem.Tooltip, menuItem.Enabled);
                     break;
                 case Enums.MenuItemType.Slider:
                     MenuSliderItemInfo sliderItem = (MenuSliderItemInfo)menuItem;
-                    menuProvider.TryRegisterSlider(menuItem.Path, menuItem.CallbackReceiver, sliderItem.DefaultValue, sliderItem.MinValue, sliderItem.MaxValue, sliderItem.Steps, sliderItem.Unit, menuItem.Tooltip);
+                    menuProvider.TryRegisterSlider(menuItem.Path, menuItem.CallbackReceiver, sliderItem.DefaultValue, sliderItem.MinValue, sliderItem.MaxValue, sliderItem.Steps, sliderItem.Unit, menuItem.Tooltip, menuItem.Enabled);
                     break;
                 default:
                     Debug.LogWarning($"Attempting to add menu item of type <color=red>{menuItem.Type}</color>, which is not supported!");

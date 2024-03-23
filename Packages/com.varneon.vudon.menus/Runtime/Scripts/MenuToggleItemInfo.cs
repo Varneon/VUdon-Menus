@@ -13,7 +13,7 @@ namespace Varneon.VUdon.Menus
 
         public string OnLabel;
 
-        public MenuToggleItemInfo(string path, MenuEventCallbackReceiver callbackReceiver, bool defaultValue = false, string offLabel = "Off", string onLabel = "On", string tooltip = "", int priority = 0)
+        public MenuToggleItemInfo(string path, MenuEventCallbackReceiver callbackReceiver, bool defaultValue = false, string offLabel = "Off", string onLabel = "On", string tooltip = "", int priority = 0, bool enabled = true)
         {
             Path = path;
 
@@ -28,6 +28,8 @@ namespace Varneon.VUdon.Menus
             Tooltip = tooltip;
 
             Priority = priority;
+
+            Enabled = enabled;
         }
     }
 }

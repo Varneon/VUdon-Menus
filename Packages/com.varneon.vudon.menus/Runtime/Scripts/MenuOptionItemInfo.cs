@@ -11,7 +11,7 @@ namespace Varneon.VUdon.Menus
 
         public int DefaultValue;
 
-        public MenuOptionItemInfo(string path, MenuEventCallbackReceiver callbackReceiver, string[] options, int defaultValue = 0, string tooltip = "", int priority = 0)
+        public MenuOptionItemInfo(string path, MenuEventCallbackReceiver callbackReceiver, string[] options, int defaultValue = 0, string tooltip = "", int priority = 0, bool enabled = true)
         {
             Path = path;
 
@@ -24,6 +24,8 @@ namespace Varneon.VUdon.Menus
             Tooltip = tooltip;
 
             Priority = priority;
+
+            Enabled = enabled;
         }
     }
 }

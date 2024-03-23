@@ -7,7 +7,7 @@ namespace Varneon.VUdon.Menus
     {
         public override MenuItemType Type => MenuItemType.Button;
 
-        public MenuButtonItemInfo(string path, MenuEventCallbackReceiver callbackReceiver, string tooltip = "", int priority = 0)
+        public MenuButtonItemInfo(string path, MenuEventCallbackReceiver callbackReceiver, string tooltip = "", int priority = 0, bool enabled = true)
         {
             Path = path;
 
@@ -16,6 +16,8 @@ namespace Varneon.VUdon.Menus
             Tooltip = tooltip;
 
             Priority = priority;
+
+            Enabled = enabled;
         }
     }
 }

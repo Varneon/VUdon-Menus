@@ -13,6 +13,8 @@ namespace Varneon.VUdon.Menus.Abstract
 
         public int Priority = 0;
 
+        public bool Enabled = true;
+
         public abstract MenuItemType Type { get; }
 
         public int CompareTo(MenuItemInfo other)

@@ -17,7 +17,7 @@ namespace Varneon.VUdon.Menus
 
         public string Unit;
 
-        public MenuSliderItemInfo(string path, MenuEventCallbackReceiver callbackReceiver, float defaultValue = 0f, float minValue = 0f, float maxValue = 100f, int steps = 10, string unit = "%", string tooltip = "", int priority = 0)
+        public MenuSliderItemInfo(string path, MenuEventCallbackReceiver callbackReceiver, float defaultValue = 0f, float minValue = 0f, float maxValue = 100f, int steps = 10, string unit = "%", string tooltip = "", int priority = 0, bool enabled = true)
         {
             Path = path;
 
@@ -36,6 +36,8 @@ namespace Varneon.VUdon.Menus
             Tooltip = tooltip;
 
             Priority = priority;
+
+            Enabled = enabled;
         }
     }
 }

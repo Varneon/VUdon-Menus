@@ -40,7 +40,7 @@ namespace Varneon.VUdon.Menus
         }
 
         [Serializable]
-        internal class Item
+        internal class Item : IComparable<Item>
         {
             [SerializeField]
             internal string Path;
@@ -52,7 +52,8 @@ namespace Varneon.VUdon.Menus
             internal string Tooltip;
 
             [SerializeField]
-            internal bool Active = true;
+            [FormerlySerializedAs("Active")]
+            internal bool Enabled = true;
 
             [SerializeField]
             internal MenuEventCallbackReceiver CallbackReceiver;
@@ -129,12 +130,21 @@ namespace Varneon.VUdon.Menus
             {
                 switch (ItemType)
                 {
-                    case MenuItemType.Button: return new MenuButtonItemInfo(Path, CallbackReceiver, Tooltip, Priority);
-                    case MenuItemType.Toggle: return new MenuToggleItemInfo(Path, CallbackReceiver, DefaultBoolean, OffLabel, OnLabel, Tooltip, Priority);
-                    case MenuItemType.Option: return new MenuOptionItemInfo(Path, CallbackReceiver, Options, DefaultOption, Tooltip, Priority);
-                    case MenuItemType.Slider: return new MenuSliderItemInfo(Path, CallbackReceiver, DefaultFloat, MinValue, MaxValue, Steps, Unit, Tooltip, Priority);
+                    case MenuItemType.Button: return new MenuButtonItemInfo(Path, CallbackReceiver, Tooltip, Priority, Enabled);
+                    case MenuItemType.Toggle: return new MenuToggleItemInfo(Path, CallbackReceiver, DefaultBoolean, OffLabel, OnLabel, Tooltip, Priority, Enabled);
+                    case MenuItemType.Option: return new MenuOptionItemInfo(Path, CallbackReceiver, Options, DefaultOption, Tooltip, Priority, Enabled);
+                    case MenuItemType.Slider: return new MenuSliderItemInfo(Path, CallbackReceiver, DefaultFloat, MinValue, MaxValue, Steps, Unit, Tooltip, Priority, Enabled);
                     default: throw new NotImplementedException();
                 }
+            }
+
+            public int CompareTo(Item other)
+            {
+                if (other == null) { return 1; }
+
+                int delta = Priority.CompareTo(other.Priority);
+
+                return delta == 0 ? Path.CompareTo(other.Path) : delta;
             }
 
 #if UNITY_EDITOR
@@ -168,8 +178,7 @@ namespace Varneon.VUdon.Menus
 
                             Priority = UnityEditor.EditorGUILayout.DelayedIntField("Priority", Priority);
 
-                            // Active state isn't applied on build yet
-                            //Active = UnityEditor.EditorGUILayout.Toggle("Active", Active);
+                            Enabled = UnityEditor.EditorGUILayout.Toggle("Enabled", Enabled);
 
                             switch (ItemType)
                             {
