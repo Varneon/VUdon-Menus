@@ -221,6 +221,8 @@ namespace Varneon.VUdon.Menus
                 if(Steps < 2) { Steps = 2; }
 
                 DefaultFloat = UnityEditor.EditorGUILayout.Slider("Default Value", DefaultFloat, MinValue, MaxValue);
+
+                Unit = UnityEditor.EditorGUILayout.DelayedTextField("Unit", Unit);
             }
 
             private void DrawOptionInspector()
