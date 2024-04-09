@@ -27,23 +27,23 @@ namespace Varneon.VUdon.Menus.Abstract
         public abstract bool IsPathRegistered(string path);
 
         [Obsolete]
-        public virtual bool TryRegisterPage(string path, string tooltip = DEFAULT_TOOLTIP) { return false; }
+        public virtual bool TryRegisterPage(string path, string tooltip = DEFAULT_TOOLTIP) => TryRegisterPage(path, tooltip, true);
         public virtual bool TryRegisterPage(string path, string tooltip = DEFAULT_TOOLTIP, bool enabled = true) { return false; }
 
         [Obsolete]
-        public virtual bool TryRegisterButton(string path, MenuEventCallbackReceiver callbackReceiver, string tooltip = DEFAULT_TOOLTIP) { return false; }
+        public virtual bool TryRegisterButton(string path, MenuEventCallbackReceiver callbackReceiver, string tooltip = DEFAULT_TOOLTIP) => TryRegisterButton(path, callbackReceiver, tooltip, true);
         public virtual bool TryRegisterButton(string path, MenuEventCallbackReceiver callbackReceiver, string tooltip = DEFAULT_TOOLTIP, bool enabled = true) { return false; }
 
         [Obsolete]
-        public virtual bool TryRegisterToggle(string path, MenuEventCallbackReceiver callbackReceiver, bool defaultValue, string offOptionName = DEFAULT_OFF_LABEL, string onOptionName = DEFAULT_ON_LABEL, string tooltip = DEFAULT_TOOLTIP) { return false; }
+        public virtual bool TryRegisterToggle(string path, MenuEventCallbackReceiver callbackReceiver, bool defaultValue, string offOptionName = DEFAULT_OFF_LABEL, string onOptionName = DEFAULT_ON_LABEL, string tooltip = DEFAULT_TOOLTIP) => TryRegisterToggle(path, callbackReceiver, defaultValue, offOptionName, onOptionName, tooltip, true);
         public virtual bool TryRegisterToggle(string path, MenuEventCallbackReceiver callbackReceiver, bool defaultValue, string offOptionName = DEFAULT_OFF_LABEL, string onOptionName = DEFAULT_ON_LABEL, string tooltip = DEFAULT_TOOLTIP, bool enabled = true) { return false; }
 
         [Obsolete]
-        public virtual bool TryRegisterOption(string path, MenuEventCallbackReceiver callbackReceiver, string[] optionNames, int defaultValue, string tooltip = DEFAULT_TOOLTIP) { return false; }
+        public virtual bool TryRegisterOption(string path, MenuEventCallbackReceiver callbackReceiver, string[] optionNames, int defaultValue, string tooltip = DEFAULT_TOOLTIP) => TryRegisterOption(path, callbackReceiver, optionNames, defaultValue, tooltip, true);
         public virtual bool TryRegisterOption(string path, MenuEventCallbackReceiver callbackReceiver, string[] optionNames, int defaultValue, string tooltip = DEFAULT_TOOLTIP, bool enabled = true) { return false; }
 
         [Obsolete]
-        public virtual bool TryRegisterSlider(string path, MenuEventCallbackReceiver callbackReceiver, float defaultValue, float minValue = DEFAULT_MIN_FLOAT, float maxValue = DEFAULT_MAX_FLOAT, int steps = DEFAULT_STEPS, string unit = DEFAULT_UNIT, string tooltip = DEFAULT_TOOLTIP) { return false; }
+        public virtual bool TryRegisterSlider(string path, MenuEventCallbackReceiver callbackReceiver, float defaultValue, float minValue = DEFAULT_MIN_FLOAT, float maxValue = DEFAULT_MAX_FLOAT, int steps = DEFAULT_STEPS, string unit = DEFAULT_UNIT, string tooltip = DEFAULT_TOOLTIP) => TryRegisterSlider(path, callbackReceiver, defaultValue, minValue, maxValue, steps, unit, tooltip, true);
         public virtual bool TryRegisterSlider(string path, MenuEventCallbackReceiver callbackReceiver, float defaultValue, float minValue = DEFAULT_MIN_FLOAT, float maxValue = DEFAULT_MAX_FLOAT, int steps = DEFAULT_STEPS, string unit = DEFAULT_UNIT, string tooltip = DEFAULT_TOOLTIP, bool enabled = true) { return false; }
 
         public virtual bool TrySetItemEnabled(string path, bool enabled, MenuEventCallbackReceiver callbackReceiver = null) { return false; }
