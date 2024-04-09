@@ -1,4 +1,5 @@
-﻿using Varneon.VUdon.Menus.Abstract;
+﻿using Varneon.VUdon.Common.VRCEnums;
+using Varneon.VUdon.Menus.Abstract;
 using Varneon.VUdon.Menus.Enums;
 
 namespace Varneon.VUdon.Menus
@@ -13,7 +14,7 @@ namespace Varneon.VUdon.Menus
 
         public string OnLabel;
 
-        public MenuToggleItemInfo(string path, MenuEventCallbackReceiver callbackReceiver, bool defaultValue = false, string offLabel = "Off", string onLabel = "On", string tooltip = "", int priority = 0, bool enabled = true)
+        public MenuToggleItemInfo(string path, MenuEventCallbackReceiver callbackReceiver, bool defaultValue = false, string offLabel = "Off", string onLabel = "On", string tooltip = "", int priority = 0, bool enabled = true, VRCPlatformTypeFlags platformFlags = (VRCPlatformTypeFlags)(-1))
         {
             Path = path;
 
@@ -30,6 +31,8 @@ namespace Varneon.VUdon.Menus
             Priority = priority;
 
             Enabled = enabled;
+
+            PlatformFlags = platformFlags;
         }
     }
 }

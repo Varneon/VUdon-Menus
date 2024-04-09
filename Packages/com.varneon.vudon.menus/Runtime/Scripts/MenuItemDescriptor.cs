@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Varneon.VUdon.Common.VRCEnums;
 using Varneon.VUdon.Menus.Abstract;
 using Varneon.VUdon.Menus.Enums;
 
@@ -98,6 +99,9 @@ namespace Varneon.VUdon.Menus
             internal string Unit = "%";
 
             [SerializeField]
+            internal VRCPlatformTypeFlags PlatformFlags = (VRCPlatformTypeFlags)(-1);
+
+            [SerializeField]
             internal bool Expanded = true;
 
             internal GUIContent HeaderContent;
@@ -130,10 +134,10 @@ namespace Varneon.VUdon.Menus
             {
                 switch (ItemType)
                 {
-                    case MenuItemType.Button: return new MenuButtonItemInfo(Path, CallbackReceiver, Tooltip, Priority, Enabled);
-                    case MenuItemType.Toggle: return new MenuToggleItemInfo(Path, CallbackReceiver, DefaultBoolean, OffLabel, OnLabel, Tooltip, Priority, Enabled);
-                    case MenuItemType.Option: return new MenuOptionItemInfo(Path, CallbackReceiver, Options, DefaultOption, Tooltip, Priority, Enabled);
-                    case MenuItemType.Slider: return new MenuSliderItemInfo(Path, CallbackReceiver, DefaultFloat, MinValue, MaxValue, Steps, Unit, Tooltip, Priority, Enabled);
+                    case MenuItemType.Button: return new MenuButtonItemInfo(Path, CallbackReceiver, Tooltip, Priority, Enabled, PlatformFlags);
+                    case MenuItemType.Toggle: return new MenuToggleItemInfo(Path, CallbackReceiver, DefaultBoolean, OffLabel, OnLabel, Tooltip, Priority, Enabled, PlatformFlags);
+                    case MenuItemType.Option: return new MenuOptionItemInfo(Path, CallbackReceiver, Options, DefaultOption, Tooltip, Priority, Enabled, PlatformFlags);
+                    case MenuItemType.Slider: return new MenuSliderItemInfo(Path, CallbackReceiver, DefaultFloat, MinValue, MaxValue, Steps, Unit, Tooltip, Priority, Enabled, PlatformFlags);
                     default: throw new NotImplementedException();
                 }
             }
@@ -186,6 +190,8 @@ namespace Varneon.VUdon.Menus
                                 case MenuItemType.Option: DrawOptionInspector(); break;
                                 case MenuItemType.Slider: DrawSliderInspector(); break;
                             }
+
+                            PlatformFlags = (VRCPlatformTypeFlags)UnityEditor.EditorGUILayout.EnumFlagsField("Platforms", PlatformFlags);
                         }
                     }
 

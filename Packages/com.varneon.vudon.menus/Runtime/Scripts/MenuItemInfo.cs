@@ -1,4 +1,5 @@
 ﻿using System;
+using Varneon.VUdon.Common.VRCEnums;
 using Varneon.VUdon.Menus.Enums;
 
 namespace Varneon.VUdon.Menus.Abstract
@@ -14,6 +15,8 @@ namespace Varneon.VUdon.Menus.Abstract
         public int Priority = 0;
 
         public bool Enabled = true;
+
+        public VRCPlatformTypeFlags PlatformFlags = (VRCPlatformTypeFlags)(-1);
 
         public abstract MenuItemType Type { get; }
 

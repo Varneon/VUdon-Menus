@@ -1,4 +1,5 @@
-﻿using Varneon.VUdon.Menus.Abstract;
+﻿using Varneon.VUdon.Common.VRCEnums;
+using Varneon.VUdon.Menus.Abstract;
 using Varneon.VUdon.Menus.Enums;
 
 namespace Varneon.VUdon.Menus
@@ -11,7 +12,7 @@ namespace Varneon.VUdon.Menus
 
         public int DefaultValue;
 
-        public MenuOptionItemInfo(string path, MenuEventCallbackReceiver callbackReceiver, string[] options, int defaultValue = 0, string tooltip = "", int priority = 0, bool enabled = true)
+        public MenuOptionItemInfo(string path, MenuEventCallbackReceiver callbackReceiver, string[] options, int defaultValue = 0, string tooltip = "", int priority = 0, bool enabled = true, VRCPlatformTypeFlags platformFlags = (VRCPlatformTypeFlags)(-1))
         {
             Path = path;
 
@@ -26,6 +27,8 @@ namespace Varneon.VUdon.Menus
             Priority = priority;
 
             Enabled = enabled;
+
+            PlatformFlags = platformFlags;
         }
     }
 }

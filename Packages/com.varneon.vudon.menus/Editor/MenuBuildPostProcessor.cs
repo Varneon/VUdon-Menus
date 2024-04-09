@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using UdonSharpEditor;
+using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
+using Varneon.VUdon.Common.VRCEnums;
 using Varneon.VUdon.Menus.Abstract;
+using VRC.Udon;
 
 namespace Varneon.VUdon.Menus.Editor
 {
@@ -28,7 +32,31 @@ namespace Varneon.VUdon.Menus.Editor
 
         private static void PostProcessMenuProvider(MenuProvider menuProvider, ImmutableSortedSet<MenuItemInfo> menuItems)
         {
-            foreach(MenuItemInfo menuItem in menuItems)
+            IEnumerable<MenuItemInfo> platformConditionalItems = menuItems.Where(item => item.PlatformFlags != (VRCPlatformTypeFlags)(-1));
+
+            if (platformConditionalItems.Count() > 0)
+            {
+                GameObject newInitializerObject = new GameObject("MenuInitializer_" + menuProvider.name);
+
+                MenuInitializer initializer = newInitializerObject.AddUdonSharpComponent<MenuInitializer>();
+
+                UdonBehaviour backingUdonBehaviour = UdonSharpEditorUtility.GetBackingUdonBehaviour(initializer);
+
+                if (!BuildPipeline.isBuildingPlayer)
+                {
+                    UdonManager.Instance.RegisterUdonBehaviour(UdonSharpEditorUtility.GetBackingUdonBehaviour(initializer));
+                }
+
+                UdonSharpEditorUtility.GetBackingUdonBehaviour(initializer).SyncMethod = VRC.SDKBase.Networking.SyncType.None;
+
+                initializer.menu = menuProvider;
+
+                initializer.platformFlags = platformConditionalItems.Select(item => (int)item.PlatformFlags).ToArray();
+
+                initializer.menuPaths = platformConditionalItems.Select(item => item.Path).ToArray();
+            }
+
+            foreach (MenuItemInfo menuItem in menuItems)
             {
                 TryRegisterMenuItem(menuProvider, menuItem);
             }
