@@ -1,6 +1,7 @@
 {
     "name": "Varneon.VUdon.Menus.Runtime",
     "references": [
+        "Varneon.VUdon.Common.Runtime",
         "UdonSharp.Runtime",
         "VRC.Udon"
     ],

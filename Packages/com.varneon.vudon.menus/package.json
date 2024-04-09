@@ -10,9 +10,11 @@
     "url": "https://github.com/Varneon"
   },
   "dependencies": {
-    "com.vrchat.worlds": "3.4.0"
+    "com.vrchat.worlds": "3.4.0",
+    "com.varneon.vudon.common": "0.2.0-beta.1"
   },
   "vpmDependencies": {
-    "com.vrchat.worlds": ">=3.4.0 <4.0.0"
+    "com.vrchat.worlds": ">=3.4.0 <4.0.0",
+    "com.varneon.vudon.common": ">=0.2.0-beta.1"
   }
 }

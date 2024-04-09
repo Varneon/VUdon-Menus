@@ -2,7 +2,10 @@
     "name": "Varneon.VUdon.Menus.Editor",
     "references": [
         "Varneon.VUdon.Menus.Runtime",
-        "UdonSharp.Runtime"
+        "Varneon.VUdon.Common.Runtime",
+        "UdonSharp.Runtime",
+        "UdonSharp.Editor",
+        "VRC.Udon"
     ],
     "includePlatforms": [
         "Editor"
