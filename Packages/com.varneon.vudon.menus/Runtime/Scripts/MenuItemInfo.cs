@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using Varneon.VUdon.Common.VRCEnums;
 using Varneon.VUdon.Menus.Enums;
 
@@ -31,7 +30,7 @@ namespace Varneon.VUdon.Menus.Abstract
 
             int delta = Priority.CompareTo(other.Priority);
 
-            return delta == 0 ? -1 : delta;
+            return delta == 0 ? Path.CompareTo(other.Path) : delta;
         }
 
         public void RegisterMirror(MenuProvider menu, string path)
