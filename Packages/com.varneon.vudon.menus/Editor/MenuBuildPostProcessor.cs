@@ -59,6 +59,11 @@ namespace Varneon.VUdon.Menus.Editor
             foreach (MenuItemInfo menuItem in menuItems)
             {
                 TryRegisterMenuItem(menuProvider, menuItem);
+
+                if (menuItem.MirrorMenu && !string.IsNullOrWhiteSpace(menuItem.MirrorPath))
+                {
+                    menuProvider.TryRegisterMirror(menuItem.Path, menuItem.MirrorMenu, menuItem.MirrorPath);
+                }
             }
         }
 

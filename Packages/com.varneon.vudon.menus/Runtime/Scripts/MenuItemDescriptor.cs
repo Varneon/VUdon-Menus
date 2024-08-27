@@ -60,6 +60,12 @@ namespace Varneon.VUdon.Menus
             internal MenuEventCallbackReceiver CallbackReceiver;
 
             [SerializeField]
+            internal MenuProvider MirrorMenu;
+
+            [SerializeField]
+            internal string MirrorPath;
+
+            [SerializeField]
             internal MenuItemType ItemType;
 
             [SerializeField]
@@ -132,14 +138,23 @@ namespace Varneon.VUdon.Menus
 
             public MenuItemInfo GetInfo()
             {
+                MenuItemInfo info;
+
                 switch (ItemType)
                 {
-                    case MenuItemType.Button: return new MenuButtonItemInfo(Path, CallbackReceiver, Tooltip, Priority, Enabled, PlatformFlags);
-                    case MenuItemType.Toggle: return new MenuToggleItemInfo(Path, CallbackReceiver, DefaultBoolean, OffLabel, OnLabel, Tooltip, Priority, Enabled, PlatformFlags);
-                    case MenuItemType.Option: return new MenuOptionItemInfo(Path, CallbackReceiver, Options, DefaultOption, Tooltip, Priority, Enabled, PlatformFlags);
-                    case MenuItemType.Slider: return new MenuSliderItemInfo(Path, CallbackReceiver, DefaultFloat, MinValue, MaxValue, Steps, Unit, Tooltip, Priority, Enabled, PlatformFlags);
+                    case MenuItemType.Button: info = new MenuButtonItemInfo(Path, CallbackReceiver, Tooltip, Priority, Enabled, PlatformFlags); break;
+                    case MenuItemType.Toggle: info = new MenuToggleItemInfo(Path, CallbackReceiver, DefaultBoolean, OffLabel, OnLabel, Tooltip, Priority, Enabled, PlatformFlags); break;
+                    case MenuItemType.Option: info = new MenuOptionItemInfo(Path, CallbackReceiver, Options, DefaultOption, Tooltip, Priority, Enabled, PlatformFlags); break;
+                    case MenuItemType.Slider: info = new MenuSliderItemInfo(Path, CallbackReceiver, DefaultFloat, MinValue, MaxValue, Steps, Unit, Tooltip, Priority, Enabled, PlatformFlags); break;
                     default: throw new NotImplementedException();
                 }
+
+                if(MirrorMenu && !string.IsNullOrWhiteSpace(MirrorPath))
+                {
+                    info.RegisterMirror(MirrorMenu, MirrorPath);
+                }
+
+                return info;
             }
 
             public int CompareTo(Item other)
@@ -179,6 +194,16 @@ namespace Varneon.VUdon.Menus
                             Tooltip = UnityEditor.EditorGUILayout.DelayedTextField("Tooltip", Tooltip);
 
                             CallbackReceiver = (MenuEventCallbackReceiver)UnityEditor.EditorGUILayout.ObjectField("Callback Receiver", CallbackReceiver, typeof(MenuEventCallbackReceiver), true);
+
+                            if (CallbackReceiver)
+                            {
+                                MirrorMenu = (MenuProvider)UnityEditor.EditorGUILayout.ObjectField("Mirror Menu", MirrorMenu, typeof(MenuProvider), true);
+
+                                if (MirrorMenu)
+                                {
+                                    MirrorPath = UnityEditor.EditorGUILayout.TextField("Mirror Path", MirrorPath);
+                                }
+                            }
 
                             Priority = UnityEditor.EditorGUILayout.DelayedIntField("Priority", Priority);
 

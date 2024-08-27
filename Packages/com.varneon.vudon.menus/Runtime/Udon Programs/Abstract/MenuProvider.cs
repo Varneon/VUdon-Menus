@@ -46,6 +46,8 @@ namespace Varneon.VUdon.Menus.Abstract
         public virtual bool TryRegisterSlider(string path, MenuEventCallbackReceiver callbackReceiver, float defaultValue, float minValue = DEFAULT_MIN_FLOAT, float maxValue = DEFAULT_MAX_FLOAT, int steps = DEFAULT_STEPS, string unit = DEFAULT_UNIT, string tooltip = DEFAULT_TOOLTIP) => TryRegisterSlider(path, callbackReceiver, defaultValue, minValue, maxValue, steps, unit, tooltip, true);
         public virtual bool TryRegisterSlider(string path, MenuEventCallbackReceiver callbackReceiver, float defaultValue, float minValue = DEFAULT_MIN_FLOAT, float maxValue = DEFAULT_MAX_FLOAT, int steps = DEFAULT_STEPS, string unit = DEFAULT_UNIT, string tooltip = DEFAULT_TOOLTIP, bool enabled = true) { return false; }
 
+        public virtual bool TryRegisterMirror(string path, MenuProvider mirrorMenu, string mirrorPath) { return false; }
+
         public virtual bool TrySetItemEnabled(string path, bool enabled, MenuEventCallbackReceiver callbackReceiver = null) { return false; }
 
         public virtual bool TryRemoveItem(string path, MenuEventCallbackReceiver callbackReceiver = null) { return false; }
